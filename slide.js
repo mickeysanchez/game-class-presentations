@@ -46,7 +46,7 @@ $(function() {
 
   function enterSlideMode() {
     slideMode = true;
-    var $slide = findClosestSlide();
+    var $slide = $(".slide").first(); //findClosestSlide();
     marginBottomHeight = $("body").css("margin-bottom");
     $("body").css("margin-bottom",
                   ($(window).height() - $(".slide").last().height()) + "px");
@@ -73,7 +73,7 @@ $(function() {
       var $elem = $("#" + hash);
       var id = $elem.attr("id");
       $elem.attr("id", "temp-" + Math.random());
-      window.location.hash = hash;
+      // window.location.hash = hash;
       $elem.attr("id", id);
     }
   }
@@ -195,8 +195,10 @@ $(function() {
   }
 
   function isTouchDevice() {
-    return !!('ontouchstart' in window) // works on most browsers 
-        || !!('onmsgesturechange' in window); // works on ie10
+    return true;
+
+    // return !!('ontouchstart' in window) // works on most browsers 
+    //     || !!('onmsgesturechange' in window); // works on ie10
   };
 
   if (isTouchDevice()) {
