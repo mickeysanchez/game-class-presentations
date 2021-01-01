@@ -64,6 +64,7 @@ $(function() {
     message("Webpage Mode");
     $("#start").show();
     $("#done, #next, #prev").hide();
+    window.location.hash = "";
   }
 
   function changeHash(hash, andScroll) {
