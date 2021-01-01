@@ -45,6 +45,7 @@ $(function() {
   window.location.hash = hash;
 
   function enterSlideMode() {
+    window.scrollTo(0, 0);
     slideMode = true;
     var $slide = $(".slide").first(); //findClosestSlide();
     marginBottomHeight = $("body").css("margin-bottom");
@@ -162,20 +163,20 @@ $(function() {
       }
     }
 
-  }, 200))
-  .on("scroll", debounce(function(e) {
-    var $closestSlide = findClosestSlide();
-    if (moving) {
-      return;
-    }
-    if (!slideMode) {
-      changeHash($closestSlide.attr("id"), false);
-    }
-    else if ($closestSlide.attr("id") !==
-             $slides.eq(slide).attr("id")) {
-      gotoSlide($closestSlide);
-    }
-  }));
+  }, 200));
+  // .on("scroll", debounce(function(e) {
+  //   var $closestSlide = findClosestSlide();
+  //   if (moving) {
+  //     return;
+  //   }
+  //   if (!slideMode) {
+  //     changeHash($closestSlide.attr("id"), false);
+  //   }
+  //   else if ($closestSlide.attr("id") !==
+  //            $slides.eq(slide).attr("id")) {
+  //     gotoSlide($closestSlide);
+  //   }
+  // }));
 
   function debounce(func, threshold, execAsap) {
     var timeout;
@@ -203,7 +204,7 @@ $(function() {
 
   if (isTouchDevice()) {
     $("body")
-    .prepend($("#touch-template").text())
+    .append($("#touch-template").text())
     .css("margin-bottom", $("#touch").outerHeight(true) + "px");
 
     $("#start").on("click", debounce(function(e) {
