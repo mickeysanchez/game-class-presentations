@@ -1,10 +1,11 @@
 body {
-  font-size: 2em;
+  font-size: 1.5em;
+  line-height: 1.25;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 h1 {
-  padding: 1em 0;
-  text-align: center;
+  padding-top: 1em;
 }
 
 #wrapper {
@@ -22,12 +23,19 @@ h1 {
 
 #touch button {
   font-size: 1em;
-  background-color: rgba(0,0,0,.8);
+  background-color: rgba(0,0,0,.6);
   color: white;
   border: none;
   padding: .3em;
-  -webkit-border-radius: .25em;
-          border-radius: .25em;
+  cursor: pointer;
+}
+
+#touch button:hover {
+  background-color: rgba(0,0,0,.8);
+}
+
+#touch button:active {
+  background-color: black;
 }
 
 #done, #next, #prev {
@@ -46,13 +54,11 @@ h1 {
   color: white;
   padding: .3em;
   margin: .3em;
-  -webkit-border-radius: .25em;
-          border-radius: .25em;
 }
 
 @media screen and (max-width:599px) {
   body {
-    font-size: 1.5em;
+    font-size: 1em;
   }
   img {
     max-width: 100%;

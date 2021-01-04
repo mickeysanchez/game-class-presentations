@@ -45,8 +45,9 @@ $(function() {
   window.location.hash = hash;
 
   function enterSlideMode() {
+    window.scrollTo(0, 0);
     slideMode = true;
-    var $slide = findClosestSlide();
+    var $slide = $(".slide").first(); //findClosestSlide();
     marginBottomHeight = $("body").css("margin-bottom");
     $("body").css("margin-bottom",
                   ($(window).height() - $(".slide").last().height()) + "px");
@@ -63,6 +64,7 @@ $(function() {
     message("Webpage Mode");
     $("#start").show();
     $("#done, #next, #prev").hide();
+    window.location.hash = "";
   }
 
   function changeHash(hash, andScroll) {
@@ -73,7 +75,7 @@ $(function() {
       var $elem = $("#" + hash);
       var id = $elem.attr("id");
       $elem.attr("id", "temp-" + Math.random());
-      window.location.hash = hash;
+      // window.location.hash = hash;
       $elem.attr("id", id);
     }
   }
@@ -162,20 +164,20 @@ $(function() {
       }
     }
 
-  }, 200))
-  .on("scroll", debounce(function(e) {
-    var $closestSlide = findClosestSlide();
-    if (moving) {
-      return;
-    }
-    if (!slideMode) {
-      changeHash($closestSlide.attr("id"), false);
-    }
-    else if ($closestSlide.attr("id") !==
-             $slides.eq(slide).attr("id")) {
-      gotoSlide($closestSlide);
-    }
-  }));
+  }, 200));
+  // .on("scroll", debounce(function(e) {
+  //   var $closestSlide = findClosestSlide();
+  //   if (moving) {
+  //     return;
+  //   }
+  //   if (!slideMode) {
+  //     changeHash($closestSlide.attr("id"), false);
+  //   }
+  //   else if ($closestSlide.attr("id") !==
+  //            $slides.eq(slide).attr("id")) {
+  //     gotoSlide($closestSlide);
+  //   }
+  // }));
 
   function debounce(func, threshold, execAsap) {
     var timeout;
@@ -195,13 +197,15 @@ $(function() {
   }
 
   function isTouchDevice() {
-    return !!('ontouchstart' in window) // works on most browsers 
-        || !!('onmsgesturechange' in window); // works on ie10
+    return true;
+
+    // return !!('ontouchstart' in window) // works on most browsers 
+    //     || !!('onmsgesturechange' in window); // works on ie10
   };
 
   if (isTouchDevice()) {
     $("body")
-    .prepend($("#touch-template").text())
+    .append($("#touch-template").text())
     .css("margin-bottom", $("#touch").outerHeight(true) + "px");
 
     $("#start").on("click", debounce(function(e) {
